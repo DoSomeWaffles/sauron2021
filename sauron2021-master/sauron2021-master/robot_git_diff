@@ -1,0 +1,149 @@
+From 664595b0d1fed80f4e0457353d0e5d26cc96c817 Mon Sep 17 00:00:00 2001
+From: Denis Rosset <denisrosset2@gmail.com>
+Date: Sun, 17 Jan 2021 19:04:32 +0100
+Subject: [PATCH] sauron communication
+
+---
+ src/event/Event.hpp             |  1 +
+ src/network/tcp/TCPDispatch.cpp |  3 +++
+ src/network/tcp/TCPEvent.hpp    | 19 +++++++++++++++++++
+ src/network/tcp/TCPMessage.hpp  |  1 +
+ src/sensors/Sauron/Sauron.cpp   | 30 ++++++++++++++++++++++++++++++
+ src/sensors/Sauron/Sauron.h     | 24 ++++++++++++++++++++++++
+ 6 files changed, 78 insertions(+)
+ create mode 100644 src/sensors/Sauron/Sauron.cpp
+ create mode 100644 src/sensors/Sauron/Sauron.h
+
+diff --git a/src/event/Event.hpp b/src/event/Event.hpp
+index 63c2fcf7..2bb39bbd 100644
+--- a/src/event/Event.hpp
++++ b/src/event/Event.hpp
+@@ -48,6 +48,7 @@ enum EventType {
+ 	
+ 	TCP_BEACON_COMPASS_POSITION_EVENT,
+ 	TCP_BEACON_CUP_POSITION_EVENT,
++	TCP_SAURON_ROBOT_POS_EVENT,
+ 
+ 	UDP_EVENT,
+ 	UDP_INDENTIFICATION_EVENT,
+diff --git a/src/network/tcp/TCPDispatch.cpp b/src/network/tcp/TCPDispatch.cpp
+index fbe425d9..b0191108 100644
+--- a/src/network/tcp/TCPDispatch.cpp
++++ b/src/network/tcp/TCPDispatch.cpp
+@@ -94,6 +94,9 @@ void TCPDispatch::dispatch(const std::string& m_address, uint8_t* m_bodyData, ui
+ 		case TCP_BEACON_CUP_POSITION_MSG:
+ 			tcpEvent = new TCPBeaconCupPosition(name, m_bodyData, m_bodySize);
+ 			break;
++		case TCP_SAURON_ROBOT_POSITION_MSG:
++			tcpEvent = new TCPSauronRobotPosition(name, m_bodyData, m_bodySize);
++			break;
+ 		default:
+ 			logger.warning() << "received unknown message type from " << m_address << ": " << std::to_string(m_bodyData[0]);
+ 	}
+diff --git a/src/network/tcp/TCPEvent.hpp b/src/network/tcp/TCPEvent.hpp
+index 9bbbe832..a21374f8 100644
+--- a/src/network/tcp/TCPEvent.hpp
++++ b/src/network/tcp/TCPEvent.hpp
+@@ -520,3 +520,22 @@ public:
+ 		return m_data[1];
+ 	}
+ };
++
++class TCPSauronRobotPosition : public TCPEvent {
++public:
++	TCPSauronRobotPosition(std::string address, uint8_t* data, size_t size) :
++			TCPEvent(TCP_SAURON_ROBOT_POS_EVENT, std::move(address), data, size) {
++	}
++
++	uint8_t getRobotID(){
++		return m_data[1];
++	}
++
++	float getPositionX() {
++		return *(float*)(m_data+2);
++	}
++
++	float getPositionY() {
++		return *(float*)(m_data+6);
++	}
++};
+diff --git a/src/network/tcp/TCPMessage.hpp b/src/network/tcp/TCPMessage.hpp
+index 1f1e0abd..81559b49 100644
+--- a/src/network/tcp/TCPMessage.hpp
++++ b/src/network/tcp/TCPMessage.hpp
+@@ -66,6 +66,7 @@ enum TCPMessageID {
+ 	TCP_ROBOT_POSITION_MSG = 202,
+ 	TCP_CAM_PROJECTION_MATRIX_MSG = 203,
+ 	TCP_ASK_CAM_PROJECTION_MATRIX_EVENT = 204,
++	TCP_SAURON_ROBOT_POSITION_MSG = 205,
+ 	TCP_ATOM_POSITIONS_MSG = 250,
+ };
+ 
+diff --git a/src/sensors/Sauron/Sauron.cpp b/src/sensors/Sauron/Sauron.cpp
+new file mode 100644
+index 00000000..24f6195b
+--- /dev/null
++++ b/src/sensors/Sauron/Sauron.cpp
+@@ -0,0 +1,30 @@
++
++#include "Sauron.h"
++#include "event/EventManager.h"
++#include "network/tcp/TCPEvent.hpp"
++#include "network/tcp/TCPMessage.hpp"
++
++using namespace std;
++
++Sauron *Sauron::m_instance = nullptr;
++
++Sauron::Sauron() : m_logger("Sauron"), m_robotPositionReceiver([this] (Event* event) {
++
++		TCPSauronRobotPosition* e = (TCPSauronRobotPosition*)event;
++		m_logger.debug() << "Got sauron robot position: " << ((int)(e->getRobotID())) << ", x: " << e->getPositionX() << ", y: " << e->getPositionY();
++
++	}, TCP_SAURON_ROBOT_POS_EVENT, true) {
++		m_logger.info() << "Sauron init";
++}
++
++Sauron::~Sauron() {
++	m_instance = nullptr;
++}
++
++Sauron *Sauron::getInstance() {
++
++	if (m_instance == nullptr) {
++		m_instance = new Sauron();
++	}
++	return m_instance;
++}
+diff --git a/src/sensors/Sauron/Sauron.h b/src/sensors/Sauron/Sauron.h
+new file mode 100644
+index 00000000..f52a7f80
+--- /dev/null
++++ b/src/sensors/Sauron/Sauron.h
+@@ -0,0 +1,24 @@
++
++#ifndef SENSORS_SAURON_H
++#define SENSORS_SAURON_H
++
++#include "event/Receiver.h"
++#include "LoggerCpp/Logger.h"
++
++class Sauron {
++
++private:
++	static Sauron* m_instance;
++
++	Log::Logger m_logger;
++
++	Receiver m_robotPositionReceiver;
++
++	Sauron();
++
++public:
++	~Sauron();
++	static Sauron* getInstance();
++};
++
++#endif /* SENSORS_SAURON_H */
+-- 
+GitLab

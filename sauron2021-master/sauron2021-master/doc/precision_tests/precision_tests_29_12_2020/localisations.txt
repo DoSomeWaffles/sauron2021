@@ -1,0 +1,4 @@
+frame id: 1609268691.7288518 aruco id: 6 robot 42 position: ( aruco: 781.873200232 aruco: 177.497084976 aruco: 397.313982619)
+frame id: 1609268691.7288518 aruco id: 7 robot 42 position: ( aruco: 1673.6324555 aruco: -149.056749433 aruco: 17.2110342136)
+frame id: 1609268691.7288518 aruco id: 17 robot 42 position: ( aruco: 541.313913472 aruco: 2205.95736178 aruco: 375.877767844)
+frame id: 1609268691.7288518 aruco id: 42 robot 42 position: ( aruco: 857.717208425 aruco: 1459.18701225 aruco: 303.763954186)

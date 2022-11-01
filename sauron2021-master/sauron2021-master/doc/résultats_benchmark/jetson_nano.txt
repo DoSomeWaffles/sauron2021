@@ -1,0 +1,69 @@
+ARUCO DETECTION :
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.311    0.311   29.824   29.824 <string>:1(<module>)
+       50    0.000    0.000    0.547    0.011 function_base.py:1453(copy)
+        1    0.000    0.000    0.000    0.000 main.py:15(gstreamer_pipeline)
+        1    1.331    1.331   29.512   29.512 main.py:44(detect_aruco)
+        1    0.000    0.000    0.000    0.000 {DetectorParameters_create}
+        1    0.000    0.000    0.000    0.000 {Dictionary_get}
+        1    0.000    0.000   29.824   29.824 {built-in method builtins.exec}
+       50    0.000    0.000    0.000    0.000 {built-in method builtins.len}
+      100    0.000    0.000    0.000    0.000 {built-in method builtins.ord}
+       50    0.005    0.000    0.005    0.000 {built-in method builtins.print}
+       50    0.547    0.011    0.547    0.011 {built-in method numpy.core.multiarray.array}
+        1    0.014    0.014    0.014    0.014 {destroyAllWindows}
+       50   26.277    0.526   26.277    0.526 {detectMarkers}
+       50    0.003    0.000    0.003    0.000 {drawDetectedMarkers}
+       50    0.388    0.008    0.388    0.008 {imshow}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        1    0.000    0.000    0.000    0.000 {method 'isOpened' of 'cv2.VideoCapture' objects}
+       50    0.607    0.012    0.607    0.012 {method 'read' of 'cv2.VideoCapture' objects}
+       50    0.069    0.001    0.069    0.001 {resize}
+       50    0.270    0.005    0.270    0.005 {waitKey}
+
+
+CPU {createBackgroundSubtractorMOG2}
+Doing CPU...
+(3000, 3000, 3)
+25.856112718582153
+         210 function calls in 25.863 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.006    0.006   25.863   25.863 <string>:1(<module>)
+        1    0.007    0.007   25.856   25.856 benchmark.py:5(cpu)
+        1    0.000    0.000   25.863   25.863 {built-in method builtins.exec}
+        2    0.000    0.000    0.000    0.000 {built-in method builtins.print}
+        1    0.000    0.000    0.000    0.000 {built-in method numpy.core.multiarray.empty}
+        2    0.000    0.000    0.000    0.000 {built-in method time.time}
+        1    0.000    0.000    0.000    0.000 {createBackgroundSubtractorMOG2}
+      100   25.558    0.256   25.558    0.256 {method 'apply' of 'cv2.BackgroundSubtractorMOG2' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+      100    0.291    0.003    0.291    0.003 {resize}
+
+
+Doing GPU...
+(3000, 3000, 3)
+6.128169775009155
+         412 function calls in 6.364 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.058    0.058    6.364    6.364 <string>:1(<module>)
+        1    0.183    0.183    6.306    6.306 benchmark.py:17(gpu)
+      100    0.004    0.000    0.004    0.000 {Stream_Null}
+        1    0.000    0.000    6.364    6.364 {built-in method builtins.exec}
+        2    0.000    0.000    0.000    0.000 {built-in method builtins.print}
+        1    0.000    0.000    0.000    0.000 {built-in method numpy.core.multiarray.empty}
+        2    0.000    0.000    0.000    0.000 {built-in method time.time}
+        1    0.000    0.000    0.000    0.000 {createBackgroundSubtractorMOG2}
+      100    5.337    0.053    5.337    0.053 {method 'apply' of 'cv2.cuda_BackgroundSubtractorMOG2' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        1    0.010    0.010    0.010    0.010 {method 'download' of 'cv2.cuda_GpuMat' objects}
+      100    0.001    0.000    0.001    0.000 {method 'size' of 'cv2.cuda_GpuMat' objects}
+        1    0.168    0.168    0.168    0.168 {method 'upload' of 'cv2.cuda_GpuMat' objects}
+      100    0.604    0.006    0.604    0.006 {resize}

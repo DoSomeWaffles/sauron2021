@@ -1,0 +1,46 @@
+matrice 1.0 réalisée au début du projet qui a été utilisé jusqu'au 27.12.2020. Faite avec des photos prisent avec différents angles de vue sur un aruco board dont les ArUcos font 8cm de côté
+
+CAMERA_MATRIX = np.array([
+    [ 1.1642185371830324e+03, 0., 1.6625098807682714e+03],
+    [ 0., 1.1645036678113613e+03, 1.2170786800318006e+03],
+    [ 0., 0., 1. ],
+])
+
+DIST_COEFFS = np.array([ -2.4181769938627334e-01, 5.8653995083099326e-02, 8.4650077651566061e-04, 2.7466061813867905e-04, -6.1956679930553812e-03 ])
+
+
+matrice 1.1 réalisée le 27.12.2020 Faite avec des photos prisent avec le même angle de vue que pour le projet (depuis le haut du pilier central) en déplacant l'aruco board entre chaque photo. Les ArUcos font 12cm de côté
+
+CAMERA_MATRIX = np.array([
+    [ 8.5140123214343430e+02, 0., 1.7129538837480509e+03],
+    [ 0., 5.7667585612294613e+02, 1.2022948581384335e+03],
+    [ 0., 0., 1. ],
+])
+
+DIST_COEFFS = np.array([ -8.1283812890437263e-02, 6.6902212599768453e-03, 2.6453762189888189e-03, -1.7997292895761559e-03, -2.4662520263853517e-04 ])
+
+matrice 1.2 réalisée le 29.12.2020 Faite avec des photos prisent avec des angles différents. Les ArUcos font 12cm de côté (140 photos prisent)
+
+
+CAMERA_MATRIX = np.array([
+    [ 1.2072034331538910e+03, 0., 1.6977711085073261e+03],
+    [ 0., 1.1902329073724356e+03, 1.2664290386828982e+03],
+    [ 0., 0., 1. ],
+])
+
+DIST_COEFFS = np.array([ -1.8839782083586495e-01, 2.8879939266968510e-02, -1.8918117889283245e-03, 6.5565242429574931e-04, -1.6932160665967502e-03 ])
+
+
+
+matrice 1.3 réalisée avec un aruco chess board (40 photos)
+
+
+CAMERA_MATRIX = np.array([ 1.1592305862786106e+03, 0., 1.5253307188764838e+03, 0.,
+       1.1486286157066584e+03, 1.2695269092138574e+03, 0., 0., 1. ]).reshape((3,3))
+
+DIST_COEFFS = np.array([ -2.3972675012404013e-01, 5.8542182247400092e-02,
+       1.6523361775908360e-03, -1.8952371066639280e-03,
+       -6.2565776743196888e-03, 0., 0., 0., 2.5537123570443160e-02,
+       -3.5531653280254740e-03, -7.1183320793895642e-03,
+       6.2468817890985349e-04, 5.0517259013847333e-03,
+       3.5630075800039122e-02 ])

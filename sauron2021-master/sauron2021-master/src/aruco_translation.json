@@ -1,0 +1,30 @@
+{
+    "translation_list": {
+        "aruco_dessus_grand_robot":[0,0,0,1],
+        "aruco_dessus_petit_robot":[0,0,0,1],
+        "aruco_dessus_robot_ennemi":[0,0,0,1],
+        "aruco_bord_grand_robot":[0,0,-170,1],
+        "aruco_arriere_grand_robot":[0,0,-100,1],
+        "aruco_bord_petit_robot":[0,0,-97,1],
+        "aruco_arriere_petit_robot":[0,0,-60,1],
+        "aruco_robot_ennemi":[0,0,-50,1]
+    },
+    "aruco_list": [
+        {"id":51, "robot":1, "translation": "aruco_bord_grand_robot"},
+        {"id":52, "robot":1, "translation": "aruco_bord_grand_robot"},
+        {"id":53, "robot":1, "translation": "aruco_arriere_grand_robot"},
+
+        {"id":54, "robot":2, "translation": "aruco_bord_petit_robot"},
+        {"id":55, "robot":2, "translation": "aruco_bord_petit_robot"},
+        {"id":56, "robot":2, "translation": "aruco_arriere_petit_robot"},
+
+        {"id":61, "robot":3, "translation": "aruco_robot_ennemi"},
+        {"id":62, "robot":3, "translation": "aruco_robot_ennemi"},
+        {"id":63, "robot":3, "translation": "aruco_robot_ennemi"},
+        {"id":64, "robot":3, "translation": "aruco_robot_ennemi"},
+        {"id":65, "robot":4, "translation": "aruco_robot_ennemi"},
+        {"id":66, "robot":4, "translation": "aruco_robot_ennemi"},
+        {"id":67, "robot":4, "translation": "aruco_robot_ennemi"},
+        {"id":68, "robot":4, "translation": "aruco_robot_ennemi"}
+    ]
+}
